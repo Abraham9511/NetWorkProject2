@@ -11,10 +11,11 @@
 ##### 路由表
 该路由表记录其所在的网络的拓扑信息
 如下格式
+** 对称信息不是冗余的 **
 
 ```
 	{‘u’： {‘u’：0，‘v’：2}，
-	  ‘v’：{‘v’：0, ‘v’}}
+	  ‘v’：{‘v’：0, ‘u’:2}}
 
 ```
 
@@ -65,14 +66,24 @@ Hello包的作用有两个
 
 ```
 	// 此处的message就是string类型
-	s.send(message ,(ip,port))
-	// 报文格式
+	s.sendto(message ,(ip,port))
+	// 报文格式，每一段之间的分割符是 '|'
 	第一个字符（0表示不是Hello包，1是hello包，此处应该是1）： 1/0 
-	第二个字符（路由条目，比如，同时需要包含自己的ip，注意了，我们一开始会为每台机器分配一个字符标致）：
-		{‘u’：192.168.199.12}，{‘v’：192.168.199.13}
+	第三个字符（路由条目和ip映射表，比如，同时需要包含自己的ip，注意了，我们一开始会为每台机器分配一个字符标致）：
+		{‘u’： {‘u’：0，‘v’：2}，‘v’：{‘v’：0, ‘u’:2}}|{‘u’:192.168.199.13,'v': 192.168.199.12}
+		
+	global router_Table;
+	global ip_Mapping;
+	global myself;
+	directNode = router_Table[myself]
+	for ip in directNode.keys():
+	 	// sendTo() ip_Mapping[ip]
 		
 ```
 
+##### 线程之间共享
+使用线程类Threading
+注意到 **路由表**  和 **ip映射表** 需要考虑到互斥问题，可参考参考资料1的链接中的RLock简单实现，拿得到数据就进行操作，拿不到就等
 
 ##### 流程
 每台电脑维一开始维护一张直接相连接的路由器的图，启动之后，会向直接的路由器发送hello包，包含自己直接连接的条目，周期暂定为5秒，并且计算自己的最短路径
@@ -89,3 +100,7 @@ Hello包的作用有两个
 
 ### 贡献者
 欧光文，庄嘉鑫，罗干
+
+#### 参考资料
+1. [RLock](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html)
+2. [Threading例子](http://www.ourunix.org/post/206.html)
