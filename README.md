@@ -25,7 +25,7 @@
 	{‘u’:192.168.199.13,
 	 'v': 192.168.199.12
 	}
-
+	
 ```
 
 ##### 路径图
@@ -34,7 +34,10 @@
 也就是说发送的时候 **消息** 的时候先从路径图找到下一跳的信息，然后从路由表找到其对应的ip地址作为下一跳的地址
 
 ```
-	{[a,b,c,d], [a,b,d,r,g]}
+	[[a,b,c,d], [a,b,d,r,g]]	
+	def xxxx():
+	    global path_Table
+	    path_Table[0][1]
 ```
 
 ##### 监听流程
@@ -48,12 +51,13 @@
 
 ```
 	// 此处的message就是string类型
-	s.send(message ,(ip,port))
+	s.sendto(message ,(ip,port))
 	// 报文格式
 	第一个字符（0表示不是Hello包，1是hello包，此处应该是0）： 1/0 
-	第二～十六个字符（目的地的ip）：
-		192.168.199.13
-	第十七之后的均是正文
+	（目的地的ip）：
+		192.168.1.13
+	 |
+	第十九之后的均是正文
 
 ```
 
@@ -104,3 +108,6 @@ Hello包的作用有两个
 #### 参考资料
 1. [RLock](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html)
 2. [Threading例子](http://www.ourunix.org/post/206.html)
+3. [__init__.py import](http://blog.sina.com.cn/s/blog_615c388d01017b5o.html)
+4. 
+~~~~

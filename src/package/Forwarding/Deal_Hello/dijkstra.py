@@ -1,3 +1,5 @@
+import threading
+
 def Initiallizatoin_For_LS(u,G):
     global INF
     D = dict()
@@ -53,6 +55,35 @@ G = { 'u': {'u':0, 'w':5, 'v':2, 'x':1} ,
       'z': {'z':0, 'w':5, 'y':2}
      }
 INF = 99999999
+
+def generate_Shortest_Path():
+    global router_Table
+    global myself
+    G = router_Table
+    D, pre= Link_State_Agorithm(myself,G);
+
+    print("----------New-Cost----------")
+    rlock = threading.RLock()
+    rlock.acquire()
+    global path_Table
+    path_Table = list()
+    for key in D.keys():
+        if D[key] == INF:
+            print(key+' INF')
+        else:
+            print(key+' '+str(D[key]))
+            if key != myself:
+                path = shortest_Path(myself, key, pre)
+                path_Table.append(path)
+                print('Shortest path from '+myself+ ' to '+key+' is')
+                output_path = ''
+                for item in path:
+                    if item == myself:
+                        output_path += item
+                    else:
+                        output_path += ' => '+item
+                    print(output_path)
+    rlock.realease()
 
 if __name__=="__main__":
     print('Elect u as the center node')
