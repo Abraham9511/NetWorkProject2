@@ -101,6 +101,8 @@ Hello包的作用有两个
 	* 处理消息转发以及显示：欧
 * hello包发送函数：罗干
 
+#### 路由器的拓扑图
+![](./Image/router.png)
 
 ### 贡献者
 欧光文，庄嘉鑫，罗干
@@ -109,5 +111,4 @@ Hello包的作用有两个
 1. [RLock](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/python_thread_sync.html)
 2. [Threading例子](http://www.ourunix.org/post/206.html)
 3. [__init__.py import](http://blog.sina.com.cn/s/blog_615c388d01017b5o.html)
-4. 
-~~~~
+4. [设置ftp匿名上传](http://www.cnblogs.com/cocoajin/p/3761414.html)
