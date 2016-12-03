@@ -1,38 +1,30 @@
 import socket, threading
 
-def get_Local_Ip():
-  try:
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.connect(('8.8.8.8', 80))
-    (addr, port) = sock.getsockname()
-    sock.close()
-    return str(addr)
-  except socket.error:
-    return "Get Local IP Error"
+def handleMessage(data):
+    global myself
+    global PORT
+    dataStr = data.decode('utf-8')
 
-def handleMessage(data, address):
-  addr, port = address
-  dataStr = data.decode('utf-8')
-  print('data is %s' %dataStr)
-  dataArray = dataStr.split('|');
-  
-  if dataArray[1] == get_Local_Ip():
-    print(dataArray[2])
-  else:
-    print('转发')
-    
+    print('DEBUG:----------')
+    print('data is %s' %dataStr)
+
+    dataArray = dataStr.split('|');
+    if dataArray[1] == myself:
+        print(dataArray[2])
+    else:
+        print('转发')
+
     lock = threading.RLock()
     flag = False
     next_ip = None
     lock.require()
-    
 
     try:
       global path_Table
-      global ip_Table
+      global ip_Mapping
       for path in path_Table:
         dest = path[-1]
-        if ip_Table.get(dest) == dataArray[1]:
+        if ip_Mapping.get(dest) == dataArray[1]:
           next_ip = path[1]
           break
     except Exception as e:
@@ -42,8 +34,7 @@ def handleMessage(data, address):
 
     if flag:
       s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-      Local_PORT=7211
-      s.sendto(data, (next_ip, Local_PORT))
+      s.sendto(data, (next_ip, PORT))
       s.close()
 
 
