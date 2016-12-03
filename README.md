@@ -102,7 +102,7 @@ Hello包的作用有两个
 * hello包发送函数：罗干
 
 #### 路由器的拓扑图
-![](./Image/router.png)
+![](./image/router.png)
 
 ### 贡献者
 欧光文，庄嘉鑫，罗干
