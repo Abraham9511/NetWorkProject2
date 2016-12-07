@@ -16,10 +16,12 @@ if __name__=="__main__":
     #s.bind(('127.0.0.1', Local_PORT))
     prefix = '192.168.199.'
     for i in range(1,255):
-        ip = prefix + str(i)
+#        ip = prefix + str(i)
         my_Ip = get_Local_Ip()
-        s.sendto("Hello, i am "+ my_Ip,(ip, Local_PORT))
+        print(my_Ip)
+#        s.sendto("Hello, i am "+ my_Ip,(ip, Local_PORT))
     s.close()
+
 
 
 
