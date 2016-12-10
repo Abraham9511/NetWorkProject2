@@ -1,11 +1,11 @@
 import socket, threading, time,sys, json
 sys.path.append("../../")
 
-# from settings import U
-# from settings import V
-# from settings import W
-# from settings import X
-# from settings import Y
+# from settings.U import *
+# from settings.V import *
+# from settings.W import *
+# from settings.X import *
+# from settings.Y import *
 from settings.Z import *
 
 def messages_to_json(type, router_table, ip_mapping):

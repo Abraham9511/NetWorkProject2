@@ -1,11 +1,12 @@
 import threading, sys
 from dijkstra import *
 sys.path.append("../../../")
-# from settings import U
-# from settings import V
-# from settings import W
-# from settings import X
-# from settings import Y
+
+# from settings.U import *
+# from settings.V import *
+# from settings.W import *
+# from settings.X import *
+# from settings.Y import *
 from settings.Z import *
 
 
@@ -20,7 +21,7 @@ def deal_With_Hello_Packet(packet_Router_table, packet_Ip_Mapping):
             if packet_Ip_Mapping[item] not in ip_Mapping:
                 ip_Mapping[item] = packet_Ip_Mapping[item]
     if packet_Router_table != router_Table:
-        for item in packet_Router_table.key():
+        for item in packet_Router_table.keys():
             if router_Table.has_key(item) == True:
                 if router_Table[item] != packet_Router_table[item]:
                     for item2 in packet_Router_table[item].keys():

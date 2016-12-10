@@ -2,11 +2,12 @@ import socket,sys, json
 from Deal_Hello.deal_With_Hello_Packet import *
 from Deal_Message.deal_With_Message_Packet import *
 sys.path.append("../../")
-# from settings import U
-# from settings import V
-# from settings import W
-# from settings import X
-# from settings import Y
+
+# from settings.U import *
+# from settings.V import *
+# from settings.W import *
+# from settings.X import *
+# from settings.Y import *
 from settings.Z import *
 
 def Listening():
@@ -24,7 +25,7 @@ def Listening():
             print("DEBUG:PACKET:"+packet)
             if packet == '':
                 continue
-            packet = json.loads(packet)
+            packet = json.loads(packet).decode('utf-8')
             if (packet['type'] == '1'):
                 print("DEBUG::This is Hello Packet")
                 packet_router_table = packet['router_Table']
