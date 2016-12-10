@@ -8,17 +8,17 @@ sys.path.append("../../../")
 # from settings import Y
 from settings.Z import *
 
-def deal_With_Message_Packet(data):
+def deal_With_Message_Packet(goal_ip, content):
     global HOST
     global Port
+    global ip_Mapping
     dataStr = data.decode('utf-8')
 
     print('DEBUG:----------')
     print('data is %s' %dataStr)
 
-    dataArray = dataStr.split('|');
-    if dataArray[1] == HOST:
-        print(dataArray[2])
+    if goal_ip == ip_Mapping[HOST]:
+        print(content)
     else:
         print('Forwarding')
 
@@ -29,10 +29,9 @@ def deal_With_Message_Packet(data):
 
     try:
       global path_Table
-      global ip_Mapping
       for path in path_Table:
         dest = path[-1]
-        if ip_Mapping.get(dest) == dataArray[1]:
+        if ip_Mapping.get(dest) == goal_ip:
           next_ip = path[1]
           break
     except Exception as e:

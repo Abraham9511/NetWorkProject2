@@ -1,9 +1,14 @@
 from package.Listening.Listening import *
 from package.Forwarding.send_hello import *
+from package.Listening.Deal_Hello.deal_With_Hello_Packet import *
+import settings.Z
 import threading
 
 
 if __name__=="__main__":
+    global router_Table
+    global ip_Mapping
+    deal_With_Hello_Packet(router_Table, ip_Mapping)
 
     forwarding = threading.Thread(target = send_hello)
     forwarding.start()
@@ -12,6 +17,7 @@ if __name__=="__main__":
     listening = threading.Thread(target = Listening)
     listening.start()
     print("DEBUG: Start listening")
+
 
     forwarding.join()
     listening.join()

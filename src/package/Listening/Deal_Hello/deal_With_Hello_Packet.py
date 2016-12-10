@@ -9,14 +9,12 @@ sys.path.append("../../../")
 from settings.Z import *
 
 
-def deal_With_Hello_Packet(hello_Packet):
+def deal_With_Hello_Packet(packet_Router_table, packet_Ip_Mapping):
     flag = True
     rlock = threading.RLock()
     rlock.acquire()
     global router_Table
     global ip_Mapping
-    packet_Router_table = hello_Packet.split('|')[1]
-    packet_Ip_Mapping = hello_Packet.split('|')[2]
     if ip_Mapping != packet_Ip_Mapping:
         for item in packet_Ip_Mapping.keys():
             if packet_Ip_Mapping[item] not in ip_Mapping:
@@ -33,8 +31,9 @@ def deal_With_Hello_Packet(hello_Packet):
     else:
         flag = False
     rlock.release()
-    if flag == True:
-        generate_Shortest_Path()
+    # if flag == True:
+    print("DEBUG::Produce New Shortest Path")
+    generate_Shortest_Path()
 
 
 
