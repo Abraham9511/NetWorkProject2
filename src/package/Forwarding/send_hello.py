@@ -31,7 +31,7 @@ def send_hello_single():
         for i in directNode.keys():
             if HOST != i:
                 ip = ip_Mapping[i]
-                s.sendto(msg, (ip, Port))
+                s.sendto(msg.encode('utf-8'), (ip, Port))
         s.close()
     finally:
         lock.release()
