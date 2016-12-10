@@ -1,18 +1,26 @@
-import socket, threading
+import socket, threading,sys
+sys.path.append("../../../")
 
-def handleMessage(data):
-    global myself
-    global PORT
+# from settings import U
+# from settings import V
+# from settings import W
+# from settings import X
+# from settings import Y
+from settings.Z import *
+
+def deal_With_Message_Packet(data):
+    global HOST
+    global Port
     dataStr = data.decode('utf-8')
 
     print('DEBUG:----------')
     print('data is %s' %dataStr)
 
     dataArray = dataStr.split('|');
-    if dataArray[1] == myself:
+    if dataArray[1] == HOST:
         print(dataArray[2])
     else:
-        print('转发')
+        print('Forwarding')
 
     lock = threading.RLock()
     flag = False
@@ -34,7 +42,7 @@ def handleMessage(data):
 
     if flag:
       s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-      s.sendto(data, (next_ip, PORT))
+      s.sendto(data, (next_ip, Port))
       s.close()
 
 

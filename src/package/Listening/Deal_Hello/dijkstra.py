@@ -1,4 +1,12 @@
-import threading
+import threading, sys
+sys.path.append("../../../")
+
+# from settings import U
+# from settings import V
+# from settings import W
+# from settings import X
+# from settings import Y
+from settings.Z import *
 
 def Initiallizatoin_For_LS(u,G):
     global INF
@@ -58,9 +66,9 @@ INF = 99999999
 
 def generate_Shortest_Path():
     global router_Table
-    global myself
+    global HOST
     G = router_Table
-    D, pre= Link_State_Agorithm(myself,G);
+    D, pre= Link_State_Agorithm(HOST,G);
 
     print("----------New-Cost----------")
     rlock = threading.RLock()
@@ -72,13 +80,13 @@ def generate_Shortest_Path():
             print(key+' INF')
         else:
             print(key+' '+str(D[key]))
-            if key != myself:
-                path = shortest_Path(myself, key, pre)
+            if key != HOST:
+                path = shortest_Path(HOST, key, pre)
                 path_Table.append(path)
-                print('Shortest path from '+myself+ ' to '+key+' is')
+                print('Shortest path from '+HOST+ ' to '+key+' is')
                 output_path = ''
                 for item in path:
-                    if item == myself:
+                    if item == HOST:
                         output_path += item
                     else:
                         output_path += ' => '+item

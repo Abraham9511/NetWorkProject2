@@ -1,7 +1,15 @@
-import threading
-import dijkstra.generate_Shortest_Path
+import threading, sys
+from dijkstra import *
+sys.path.append("../../../")
+# from settings import U
+# from settings import V
+# from settings import W
+# from settings import X
+# from settings import Y
+from settings.Z import *
 
-def deat_With_Hello_Packet(hello_Packet):
+
+def deal_With_Hello_Packet(hello_Packet):
     flag = True
     rlock = threading.RLock()
     rlock.acquire()
@@ -26,7 +34,8 @@ def deat_With_Hello_Packet(hello_Packet):
         flag = False
     rlock.release()
     if flag == True:
-        dijkstra.generate_Shortest_Path()
+        generate_Shortest_Path()
+
 
 
 
