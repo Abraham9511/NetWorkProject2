@@ -75,24 +75,21 @@ def generate_Shortest_Path():
     rlock.acquire()
     global path_Table
     path_Table = list()
-    # print("DEBUG::"+ str(D))
     for key in D.keys():
         if D[key] == INF:
             continue
         else:
-            # print(key+' '+str(D[key]))
             if key != HOST:
                 path = shortest_Path(HOST, key, pre)
                 path_Table.append(path)
-                out = "Shortest path from "+HOST+ " to "+key+" is"
-                print(out,end="")
+                print("Shortest path from "+HOST+ " to "+key+" is: ", end="")
                 output_path = ''
                 for item in path:
                     if item == HOST:
                         output_path += item
                     else:
                         output_path += ' => '+item
-                    print(output_path)
+                print(output_path)
     rlock.release()
 
 # if __name__=="__main__":

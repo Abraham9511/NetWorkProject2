@@ -28,7 +28,7 @@ def deal_With_Hello_Packet(packet_Router_table, packet_Ip_Mapping):
                         router_Table[item][item2] = packet_Router_table[item][item2]
             else:
                 for item2 in packet_Router_table[item].keys():
-                    router_Table[item][item2] = packet_Router_table[item][item2]
+                    router_Table[item] = packet_Router_table[item]
     else:
         flag = False
     rlock.release()
