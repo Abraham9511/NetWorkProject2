@@ -25,7 +25,7 @@ def Listening():
             print("DEBUG:PACKET:"+packet)
             if packet == '':
                 continue
-            packet = json.loads(packet)
+            packet = json.loads(packet.decode('utf-8'))
             if (packet['type'] == '1'):
                 print("DEBUG::This is Hello Packet")
                 packet_router_table = packet['router_Table']
