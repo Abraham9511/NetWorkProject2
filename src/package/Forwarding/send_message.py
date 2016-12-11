@@ -50,7 +50,3 @@ class Application(Frame):
     finally:
       lock.release()
 
-
-app = Application()
-app.master.title('Send Message')
-app.mainloop()

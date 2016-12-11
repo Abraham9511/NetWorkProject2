@@ -1,5 +1,6 @@
 from package.Listening.Listening import *
 from package.Forwarding.send_hello import *
+from package.Forwarding.send_message import *
 from package.Listening.Deal_Hello.deal_With_Hello_Packet import *
 
 import settings.Z
@@ -25,6 +26,9 @@ if __name__=="__main__":
     listening.start()
     print("DEBUG: Start listening")
 
+    app = Application()
+    app.master.title('Send Message')
+    app.mainloop()
 
     forwarding.join()
     listening.join()
