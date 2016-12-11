@@ -12,10 +12,10 @@ def deal_With_Message_Packet(goal_ip, content):
     global HOST
     global Port
     global ip_Mapping
-    dataStr = data.decode('utf-8')
+    content = content.decode('utf-8')
 
     print('DEBUG:----------')
-    print('data is %s' %dataStr)
+    print('content is %s' %content)
 
     if goal_ip == ip_Mapping[HOST]:
         print(content)
@@ -41,7 +41,7 @@ def deal_With_Message_Packet(goal_ip, content):
 
     if flag:
       s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-      s.sendto(data, (next_ip, Port))
+      s.sendto(content, (next_ip, Port))
       s.close()
 
 
