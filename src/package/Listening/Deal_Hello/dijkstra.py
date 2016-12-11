@@ -1,5 +1,5 @@
 import threading, sys
-sys.path.append("../../../")
+# sys.path.append("../../../")
 
 # from settings.U import *
 # from settings.V import *
@@ -44,7 +44,7 @@ def shortest_Path(u, end, pre):
 
 # u is the first node for this LS
 def Link_State_Agorithm(u, G):
-    D, curNode, pre= Initiallizatoin_For_LS(u,G);
+    D, curNode, pre= Initiallizatoin_For_LS(u,G)
     while curNode != set(G.keys()) :
         w = min_D_w(D, curNode)
         curNode.add(w)
@@ -68,7 +68,7 @@ def generate_Shortest_Path():
     global router_Table
     global HOST
     G = router_Table
-    D, pre= Link_State_Agorithm(HOST,G);
+    D, pre= Link_State_Agorithm(HOST,G)
 
     print("----------New-Cost----------")
     rlock = threading.RLock()
@@ -84,7 +84,8 @@ def generate_Shortest_Path():
             if key != HOST:
                 path = shortest_Path(HOST, key, pre)
                 path_Table.append(path)
-                print 'Shortest path from '+HOST+ ' to '+key+' is',
+                out = "Shortest path from "+HOST+ " to "+key+" is"
+                print(out,end="")
                 output_path = ''
                 for item in path:
                     if item == HOST:

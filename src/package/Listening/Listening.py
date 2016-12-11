@@ -1,6 +1,6 @@
 import socket,sys, json
-from Deal_Hello.deal_With_Hello_Packet import *
-from Deal_Message.deal_With_Message_Packet import *
+from .Deal_Hello.deal_With_Hello_Packet import *
+from .Deal_Message.deal_With_Message_Packet import *
 sys.path.append("../../")
 
 # from settings.U import *
@@ -22,10 +22,10 @@ def Listening():
     while True:
         try:
             packet, address = s.recvfrom(Port)
-            print("DEBUG:PACKET:"+packet)
             if packet == '':
                 continue
             packet = json.loads(packet.decode('utf-8'))
+            print(packet)
             if (packet['type'] == '1'):
                 print("DEBUG::This is Hello Packet")
                 packet_router_table = packet['router_Table']
