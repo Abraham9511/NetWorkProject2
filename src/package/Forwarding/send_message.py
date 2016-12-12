@@ -40,20 +40,20 @@ class Application(Frame):
     try:
       if dest == None:
         messagebox.showinfo('Message', 'Please input the destination ip address!')
-      elif package.settings.setting.ip_Mapping(dest) == None:
+      elif package.settings.setting.ip_Mapping[dest] == None:
         messagebox.showinfo('Message', 'The destination ip address does not exist!')
       elif message == None:
         messagebox.showinfo('Message', 'Please input the message!')
       else:
-        destIp = package.settings.setting.ip_Mapping(dest)
+        destIp = package.settings.setting.ip_Mapping[dest]
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         for dst in package.settings.setting.path_Table:
           if dst[-1] == dest:
             path = dst
             print("PATH %s" % path)
             break
-        ip = package.settings.setting.ip_Mapping[[1]]
-        s.sendto(json.dumps(messages_to_json("0",destIp, message)).encode('utf-8'), (ip, package.settings.setting.Port))
+        ip = package.settings.setting.ip_Mapping[path[1]]
+        s.sendto(messages_to_json("0",destIp, message).encode('utf-8'), (ip, package.settings.setting.Port))
         s.close()
     finally:
       lock.release()

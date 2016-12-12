@@ -14,7 +14,7 @@ def send_hello_single():
     # lock = threading.RLock()
     # lock.acquire()
     try:
-        msg = messages_to_json('1', package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
+        msg = messages_to_json("1", package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
         directNode = package.settings.setting.router_Table[package.settings.setting.HOST]
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         for i in directNode.keys():

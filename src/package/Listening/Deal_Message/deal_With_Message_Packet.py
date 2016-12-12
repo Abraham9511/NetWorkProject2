@@ -7,13 +7,10 @@ import socket, threading
 import package.settings.setting
 
 def deal_With_Message_Packet(goal_ip, content):
-    global ip_Mapping
-    content = content.decode('utf-8')
-
     print('DEBUG:----------')
     print('content is %s' %content)
 
-    if goal_ip == ip_Mapping[package.settings.setting.HOST]:
+    if goal_ip == package.settings.setting[package.settings.setting.HOST]:
         print(content)
     else:
         print('Forwarding')
@@ -26,7 +23,7 @@ def deal_With_Message_Packet(goal_ip, content):
     try:
       for path in package.settings.setting.path_Table:
         dest = path[-1]
-        if ip_Mapping.get(dest) == goal_ip:
+        if package.settings.setting[dest] == goal_ip:
           next_ip = path[1]
           break
     except Exception as e:
