@@ -20,10 +20,10 @@ def Listening():
         try:
             rlock = threading.RLock()
             rlock.acquire()
-            packet, address = s.recvfrom(package.settings.setting.Port)
-            if packet == '':
+            new_packet, address = s.recvfrom(package.settings.setting.Port)
+            if new_packet == '':
                 continue
-            packet = json.loads(packet.decode('utf-8'))
+            packet = json.loads(new_packet.decode('utf-8'))
             print(packet)
             if (packet['type'] == '1'):
                 print("DEBUG::This is Hello Packet")
@@ -34,7 +34,7 @@ def Listening():
                 print("DEBUG::This is Message Packet")
                 goal_ip = packet['goal_ip']
                 content = packet['content']
-                deal_With_Message_Packet(goal_ip, content)
+                deal_With_Message_Packet(goal_ip, content, new_packet)
             rlock.release()
         except socket.error:
             print("DEBUG::Fail to Listening\n")

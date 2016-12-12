@@ -6,11 +6,11 @@ import socket, threading
 # import package.settings.Y
 import package.settings.setting
 
-def deal_With_Message_Packet(goal_ip, content):
+def deal_With_Message_Packet(goal_ip, content, new_packet):
     print('DEBUG:----------')
     print('content is %s' %content)
 
-    if goal_ip == package.settings.setting[package.settings.setting.HOST]:
+    if goal_ip == package.settings.setting.ip_Mapping[package.settings.setting.HOST]:
         print(content)
     else:
         print('Forwarding')
@@ -23,8 +23,8 @@ def deal_With_Message_Packet(goal_ip, content):
     try:
       for path in package.settings.setting.path_Table:
         dest = path[-1]
-        if package.settings.setting[dest] == goal_ip:
-          next_ip = path[1]
+        if package.settings.setting.ip_Mapping[dest] == goal_ip:
+          next_ip = package.settings.setting.ip_Mapping[path[1]]
           break
     except Exception as e:
       print('except: ', e)
