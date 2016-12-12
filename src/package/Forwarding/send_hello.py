@@ -1,4 +1,4 @@
-import socket, threading, time,json
+import socket, time,json
 import package.settings.setting
 
 def messages_to_json(type, router_table, ip_mapping):
@@ -11,8 +11,6 @@ def messages_to_json(type, router_table, ip_mapping):
 
 
 def send_hello_single():
-    # lock = threading.RLock()
-    # lock.acquire()
     try:
         msg = messages_to_json("1", package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
         directNode = package.settings.setting.router_Table[package.settings.setting.HOST]

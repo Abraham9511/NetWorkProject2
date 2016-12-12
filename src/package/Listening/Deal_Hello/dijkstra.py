@@ -1,8 +1,3 @@
-# import package.settings.U
-# import package.settings.V
-# import package.settings.W
-# import package.settings.X
-# import package.settings.Y
 import package.settings.setting
 
 def Initiallizatoin_For_LS(u,G):

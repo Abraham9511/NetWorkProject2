@@ -1,12 +1,6 @@
-import socket,sys, json, threading
+import socket,json, threading
 from .Deal_Hello.deal_With_Hello_Packet import *
 from .Deal_Message.deal_With_Message_Packet import *
-
-# import package.settings.U
-# import package.settings.V
-# import package.settings.W
-# import package.settings.X
-# import package.settings.Y
 import package.settings.setting
 
 def Listening():

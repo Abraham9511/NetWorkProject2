@@ -128,6 +128,43 @@ json -> dict
 #### 依赖包
 sudo apt install python3-tk
 
+#### 分工
+##### 写文档
+欧光文
+
+* send_message
+* deal_With_Message_Packet
+* 着重突出网络传输编码问题
+
+罗干
+
+* settings
+* send_hello
+* main
+
+庄嘉鑫
+
+* 着重突出python3 import问题
+* Listening
+* deal_With_Hello_Packet
+
+#### 遇到的难点
+##### 网络传输问题
+##### python3 import问题
+
+#### 文档
+##### send_hello.py
+function
+* 输入：
+* 输出：
+* 功能：
+
+
+#### 进度
+##### 12.12
+除了网络节点瘫痪处理外基本实现
+需要补充ospf的相关知识以及预订12.14晚上7点518 6台机器测试
+
 ### 贡献者
 欧光文，庄嘉鑫，罗干
 

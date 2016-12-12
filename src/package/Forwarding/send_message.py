@@ -1,11 +1,6 @@
 from tkinter import *
 import tkinter.messagebox as messagebox
-import socket, threading, time, json
-# import package.settings.U
-# import package.settings.V
-# import package.settings.W
-# import package.settings.X
-# import package.settings.Y
+import socket, threading, json
 import package.settings.setting
 
 
