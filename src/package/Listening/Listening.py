@@ -12,7 +12,8 @@ import package.settings.Z
 def Listening():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.bind((package.settings.Z.ip_Mapping[package.settings.Z.HOST], package.settings.Z.Port))
+        port = package.settings.Z.Port
+        s.bind(("", port))
     except socket.error:
         print("DEBUG:: Listenning Cant't bind port")
     while True:
