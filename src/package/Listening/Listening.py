@@ -7,12 +7,12 @@ from .Deal_Message.deal_With_Message_Packet import *
 # import package.settings.W
 # import package.settings.X
 # import package.settings.Y
-import package.settings.Z
+import package.settings.setting
 
 def Listening():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        port = package.settings.Z.Port
+        port = package.settings.setting.Port
         s.bind(("", port))
     except socket.error:
         print("DEBUG:: Listenning Cant't bind port")
@@ -20,7 +20,7 @@ def Listening():
         try:
             rlock = threading.RLock()
             rlock.acquire()
-            packet, address = s.recvfrom(package.settings.Z.Port)
+            packet, address = s.recvfrom(package.settings.setting.Port)
             if packet == '':
                 continue
             packet = json.loads(packet.decode('utf-8'))

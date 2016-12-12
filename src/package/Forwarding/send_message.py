@@ -6,7 +6,7 @@ import socket, threading, time, json
 # import package.settings.W
 # import package.settings.X
 # import package.settings.Y
-import package.settings.Z
+import package.settings.setting
 
 
 def messages_to_json(type, goal_ip, content):
@@ -40,20 +40,20 @@ class Application(Frame):
     try:
       if dest == None:
         messagebox.showinfo('Message', 'Please input the destination ip address!')
-      elif package.settings.Z.ip_Mapping(dest) == None:
+      elif package.settings.setting.ip_Mapping(dest) == None:
         messagebox.showinfo('Message', 'The destination ip address does not exist!')
       elif message == None:
         messagebox.showinfo('Message', 'Please input the message!')
       else:
-        destIp = package.settings.Z.ip_Mapping(dest)
+        destIp = package.settings.setting.ip_Mapping(dest)
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        for dst in package.settings.Z.path_Table:
+        for dst in package.settings.setting.path_Table:
           if dst[-1] == dest:
             path = dst
             print("PATH %s" % path)
             break
-        ip = package.settings.Z.ip_Mapping[[1]]
-        s.sendto(json.dumps(messages_to_json("0",destIp, message)).encode('utf-8'), (ip, package.settings.Z.Port))
+        ip = package.settings.setting.ip_Mapping[[1]]
+        s.sendto(json.dumps(messages_to_json("0",destIp, message)).encode('utf-8'), (ip, package.settings.setting.Port))
         s.close()
     finally:
       lock.release()

@@ -1,10 +1,5 @@
 import socket, threading, time,json
-# import package.settings.U
-# import package.settings.V
-# import package.settings.W
-# import package.settings.X
-# import package.settings.Y
-import package.settings.Z
+import package.settings.setting
 
 def messages_to_json(type, router_table, ip_mapping):
     message = dict()
@@ -19,19 +14,16 @@ def send_hello_single():
     # lock = threading.RLock()
     # lock.acquire()
     try:
-        msg = messages_to_json('1', package.settings.Z.router_Table, package.settings.Z.ip_Mapping)
-        directNode = package.settings.Z.router_Table[package.settings.Z.HOST]
+        msg = messages_to_json('1', package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
+        directNode = package.settings.setting.router_Table[package.settings.setting.HOST]
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         for i in directNode.keys():
-            if package.settings.Z.HOST != i:
-                ip = package.settings.Z.ip_Mapping[i]
-                s.sendto(msg.encode('utf-8'), (ip, package.settings.Z.Port))
+            if package.settings.setting.HOST != i:
+                ip = package.settings.setting.ip_Mapping[i]
+                s.sendto(msg.encode('utf-8'), (ip, package.settings.setting.Port))
         s.close()
     except Exception as e:
       print('DEBUG::Except: ', e)
-    # finally:
-    #     lock.release()
-
 
 def send_hello():
     while True:

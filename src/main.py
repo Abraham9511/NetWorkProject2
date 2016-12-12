@@ -8,14 +8,14 @@ from package.Listening.Deal_Hello.deal_With_Hello_Packet import *
 # import package.settings.W
 # import package.settings.X
 # import package.settings.Y
-import package.settings.Z
+import package.settings.setting
 
 import threading
 
 
 if __name__=="__main__":
 
-    deal_With_Hello_Packet(package.settings.Z.router_Table, package.settings.Z.ip_Mapping)
+    deal_With_Hello_Packet(package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
 
     forwarding = threading.Thread(target = send_hello)
     forwarding.start()
