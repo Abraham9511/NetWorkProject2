@@ -1,27 +1,25 @@
-import socket,sys, json
+import socket,sys, json, threading
 from .Deal_Hello.deal_With_Hello_Packet import *
 from .Deal_Message.deal_With_Message_Packet import *
-sys.path.append("../../")
 
-# from settings.U import *
-# from settings.V import *
-# from settings.W import *
-# from settings.X import *
-# from settings.Y import *
-from settings.Z import *
+# import package.settings.U
+# import package.settings.V
+# import package.settings.W
+# import package.settings.X
+# import package.settings.Y
+import package.settings.Z
 
 def Listening():
-    global HOST
-    global Port
-    global ip_Mapping
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.bind((ip_Mapping[HOST], Port))
+        s.bind((package.settings.Z.ip_Mapping[package.settings.Z.HOST], package.settings.Z.Port))
     except socket.error:
         print("DEBUG:: Listenning Cant't bind port")
     while True:
         try:
-            packet, address = s.recvfrom(Port)
+            rlock = threading.RLock()
+            rlock.acquire()
+            packet, address = s.recvfrom(package.settings.Z.Port)
             if packet == '':
                 continue
             packet = json.loads(packet.decode('utf-8'))
@@ -36,5 +34,6 @@ def Listening():
                 goal_ip = packet['goal_ip']
                 content = packet['content']
                 deal_With_Message_Packet(goal_ip, content)
+            rlock.release()
         except socket.error:
             print("DEBUG::Fail to Listening\n")

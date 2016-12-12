@@ -1,61 +1,44 @@
-import socket, threading,sys
-sys.path.append("../../../")
-
-# from settings.U import *
-# from settings.V import *
-# from settings.W import *
-# from settings.X import *
-# from settings.Y import *
-from settings.Z import *
+import socket, threading
+# import package.settings.U
+# import package.settings.V
+# import package.settings.W
+# import package.settings.X
+# import package.settings.Y
+import package.settings.Z
 
 def deal_With_Message_Packet(goal_ip, content):
-    global HOST
-    global Port
     global ip_Mapping
     content = content.decode('utf-8')
 
     print('DEBUG:----------')
     print('content is %s' %content)
 
-    if goal_ip == ip_Mapping[HOST]:
+    if goal_ip == ip_Mapping[package.settings.Z.HOST]:
         print(content)
     else:
         print('Forwarding')
 
-    lock = threading.RLock()
+    # lock = threading.RLock()
     flag = False
     next_ip = None
-    lock.require()
+    # lock.require()
 
     try:
-      global path_Table
-      for path in path_Table:
+      for path in package.settings.Z.path_Table:
         dest = path[-1]
         if ip_Mapping.get(dest) == goal_ip:
           next_ip = path[1]
           break
     except Exception as e:
       print('except: ', e)
-    finally:
-      lock.release()
+    # finally:
+    #   lock.release()
 
     if flag:
       s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-      s.sendto(content, (next_ip, Port))
+      s.sendto(content, (next_ip, package.settings.Z.Port))
       s.close()
 
 
-if __name__ == '__main__':
-  HOST = ""
-  PORT = 7211
-  s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-  s.bind((HOST, PORT))
-  print('listening...')
 
-  while True:
-    data, address = s.recvfrom(4096)
-    print(data.decode('utf-8'))
-    t = threading.Thread(target = handleMessage, args = (data, address))
-    t.start()
-    t.join()
 

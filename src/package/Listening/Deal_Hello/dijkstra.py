@@ -1,15 +1,11 @@
-import threading, sys
-# sys.path.append("../../../")
-
-# from settings.U import *
-# from settings.V import *
-# from settings.W import *
-# from settings.X import *
-# from settings.Y import *
-from settings.Z import *
+# import package.settings.U
+# import package.settings.V
+# import package.settings.W
+# import package.settings.X
+# import package.settings.Y
+import package.settings.Z
 
 def Initiallizatoin_For_LS(u,G):
-    global INF
     D = dict()
     pre = dict()
     curNode = set([u])
@@ -18,13 +14,12 @@ def Initiallizatoin_For_LS(u,G):
             D[v] = G[u][v]
             pre[v] = u
         else:
-            D[v] = INF
+            D[v] = package.settings.Z.INF
     return D, curNode, pre
 
 def min_D_w(D,curNode):
-    global INF
     min_Index = 'NO'
-    min_Value = INF
+    min_Value = package.settings.Z.INF
     for node in D.keys():
         if D[node] < min_Value and node not in curNode:
             min_Index = node
@@ -62,43 +57,39 @@ def Link_State_Agorithm(u, G):
 #       'y': {'y':0, 'z':2, 'w':1, 'x':1},
 #       'z': {'z':0, 'w':5, 'y':2}
 #      }
-# INF = 99999999
+# package.settings.Z.INF = 99999999
 
 def generate_Shortest_Path():
-    global router_Table
-    global HOST
-    G = router_Table
-    D, pre= Link_State_Agorithm(HOST,G)
+    package.settings.Z.path_Table = list()
+    G = package.settings.Z.router_Table
+    D, pre= Link_State_Agorithm(package.settings.Z.HOST ,G)
 
     print("----------New-Cost----------")
-    rlock = threading.RLock()
-    rlock.acquire()
-    global path_Table
-    path_Table = list()
+    # rlock = threading.RLock()
+    # rlock.acquire()
     for key in D.keys():
-        if D[key] == INF:
+        if D[key] == package.settings.Z.INF:
             continue
         else:
-            if key != HOST:
-                path = shortest_Path(HOST, key, pre)
-                path_Table.append(path)
-                print("Shortest path from "+HOST+ " to "+key+" is: ", end="")
+            if key != package.settings.Z.HOST :
+                path = shortest_Path(package.settings.Z.HOST , key, pre)
+                package.settings.Z.path_Table.append(path)
+                print("Shortest path from "+package.settings.Z.HOST + " to "+key+" is: ", end="")
                 output_path = ''
                 for item in path:
-                    if item == HOST:
+                    if item == package.settings.Z.HOST :
                         output_path += item
                     else:
                         output_path += ' => '+item
                 print(output_path)
-    rlock.release()
 
 # if __name__=="__main__":
 #     print('Elect u as the center node')
 #     print('Run LS')
 #     D, pre= Link_State_Agorithm('u',G)
 #     for key in D.keys():
-#         if D[key] == INF:
-#             print(key+' INF')
+#         if D[key] == package.settings.Z.INF:
+#             print(key+' package.settings.Z.INF')
 #         else:
 #             print(key+' '+str(D[key]))
 #     path = shortest_Path('u', 'z', pre)

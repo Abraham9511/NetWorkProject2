@@ -3,20 +3,19 @@ from package.Forwarding.send_hello import *
 from package.Forwarding.send_message import *
 from package.Listening.Deal_Hello.deal_With_Hello_Packet import *
 
-import settings.Z
-# import settings.X
-# import settings.Y
-# import settings.U
-# import settings.V
-# import settings.W
+# import package.settings.U
+# import package.settings.V
+# import package.settings.W
+# import package.settings.X
+# import package.settings.Y
+import package.settings.Z
 
 import threading
 
 
 if __name__=="__main__":
-    global router_Table
-    global ip_Mapping
-    deal_With_Hello_Packet(router_Table, ip_Mapping)
+
+    deal_With_Hello_Packet(package.settings.Z.router_Table, package.settings.Z.ip_Mapping)
 
     forwarding = threading.Thread(target = send_hello)
     forwarding.start()

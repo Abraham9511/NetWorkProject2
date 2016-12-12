@@ -1,12 +1,10 @@
-import socket, threading, time,sys, json
-sys.path.append("../../")
-
-# from settings.U import *
-# from settings.V import *
-# from settings.W import *
-# from settings.X import *
-# from settings.Y import *
-from settings.Z import *
+import socket, threading, time,json
+# import package.settings.U
+# import package.settings.V
+# import package.settings.W
+# import package.settings.X
+# import package.settings.Y
+import package.settings.Z
 
 def messages_to_json(type, router_table, ip_mapping):
     message = dict()
@@ -18,23 +16,21 @@ def messages_to_json(type, router_table, ip_mapping):
 
 
 def send_hello_single():
-    lock = threading.RLock()
-    lock.acquire()
-    global router_Table
-    global ip_Mapping
-    global HOST
-    global Port
+    # lock = threading.RLock()
+    # lock.acquire()
     try:
-        msg = messages_to_json('1', router_Table, ip_Mapping)
-        directNode = router_Table[HOST]
+        msg = messages_to_json('1', package.settings.Z.router_Table, package.settings.Z.ip_Mapping)
+        directNode = package.settings.Z.router_Table[package.settings.Z.HOST]
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         for i in directNode.keys():
-            if HOST != i:
-                ip = ip_Mapping[i]
-                s.sendto(msg.encode('utf-8'), (ip, Port))
+            if package.settings.Z.HOST != i:
+                ip = package.settings.Z.ip_Mapping[i]
+                s.sendto(msg.encode('utf-8'), (ip, package.settings.Z.Port))
         s.close()
-    finally:
-        lock.release()
+    except Exception as e:
+      print('DEBUG::Except: ', e)
+    # finally:
+    #     lock.release()
 
 
 def send_hello():

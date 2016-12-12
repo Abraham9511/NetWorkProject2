@@ -1,40 +1,32 @@
-import threading, sys
-from .dijkstra import *
-sys.path.append("../../../")
+import package.Listening.Deal_Hello.dijkstra
 
-# from settings.U import *
-# from settings.V import *
-# from settings.W import *
-# from settings.X import *
-# from settings.Y import *
-from settings.Z import *
-
+# import package.settings.U
+# import package.settings.V
+# import package.settings.W
+# import package.settings.X
+# import package.settings.Y
+import package.settings.Z
 
 def deal_With_Hello_Packet(packet_Router_table, packet_Ip_Mapping):
     flag = True
-    rlock = threading.RLock()
-    rlock.acquire()
-    global router_Table
-    global ip_Mapping
-    if ip_Mapping != packet_Ip_Mapping:
+    if package.settings.Z.ip_Mapping != packet_Ip_Mapping:
         for item in packet_Ip_Mapping.keys():
-            if packet_Ip_Mapping[item] not in ip_Mapping:
-                ip_Mapping[item] = packet_Ip_Mapping[item]
-    if packet_Router_table != router_Table:
+            if packet_Ip_Mapping[item] not in package.settings.Z.ip_Mapping:
+                package.settings.Z.ip_Mapping[item] = packet_Ip_Mapping[item]
+    if packet_Router_table != package.settings.Z.router_Table:
         for item in packet_Router_table.keys():
-            if router_Table.get(item) != None:
-                if router_Table[item] != packet_Router_table[item]:
+            if package.settings.Z.router_Table.get(item) != None:
+                if package.settings.Z.router_Table[item] != packet_Router_table[item]:
                     for item2 in packet_Router_table[item].keys():
-                        router_Table[item][item2] = packet_Router_table[item][item2]
+                        package.settings.Z.router_Table[item][item2] = packet_Router_table[item][item2]
             else:
                 for item2 in packet_Router_table[item].keys():
-                    router_Table[item] = packet_Router_table[item]
+                    package.settings.Z.router_Table[item] = packet_Router_table[item]
     else:
         flag = False
-    rlock.release()
     # if flag == True:
     print("DEBUG::Produce New Shortest Path")
-    generate_Shortest_Path()
+    package.Listening.Deal_Hello.dijkstra.generate_Shortest_Path()
 
 
 
