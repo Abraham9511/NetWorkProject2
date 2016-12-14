@@ -1,5 +1,5 @@
-import socket, time,json
-import package.settings.setting
+import socket, time, json
+import package.settings.setting as setting
 
 def messages_to_json(type, router_table, ip_mapping):
     message = dict()
@@ -12,13 +12,18 @@ def messages_to_json(type, router_table, ip_mapping):
 
 def send_hello_single():
     try:
-        msg = messages_to_json("1", package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
-        directNode = package.settings.setting.router_Table[package.settings.setting.HOST]
+        msg = messages_to_json("1", setting.router_Table, setting.ip_Mapping)
+        directNode = setting.router_Table[setting.HOST]
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        for i in directNode.keys():
-            if package.settings.setting.HOST != i:
-                ip = package.settings.setting.ip_Mapping[i]
-                s.sendto(msg.encode('utf-8'), (ip, package.settings.setting.Port))
+        me = setting.ip_Mapping[setting.HOST]
+        for num in range(2, 254):
+            ip = '192.168.199.' + str(num)
+            if ip != me:
+                s.sendto(msg.encode('utf-8'), (ip, setting.Port))
+        # for i in directNode.keys():
+        #     if setting.HOST != i:
+        #         ip = setting.ip_Mapping[i]
+        #         s.sendto(msg.encode('utf-8'), (ip, setting.Port))
         s.close()
     except Exception as e:
       print('DEBUG::Except: ', e)

@@ -18,6 +18,14 @@ path_Table = list()
 #   'w': '192.168.199.208',
 #   'x': '192.168.199.69'
 # }
+# 
+# receiver = {
+#   'v': False,
+#   'w': False,
+#   'x': False,
+#   'y': False,
+#   'z': False
+# }
 #
 #
 # ## v ##
@@ -35,6 +43,14 @@ path_Table = list()
 #   'v': '192.168.199.138',
 #   'w': '192.168.199.208',
 #   'x': '192.168.199.60'
+# }
+# 
+# receiver = {
+#   'u': False,
+#   'w': False,
+#   'x': False,
+#   'y': False,
+#   'z': False
 # }
 #
 #
@@ -58,6 +74,14 @@ path_Table = list()
 #   'y': '192.168.199.5',
 #   'z': '192.168.199.6'
 # }
+# 
+# receiver = {
+#   'u': False,
+#   'v': False,
+#   'x': False,
+#   'y': False,
+#   'z': False
+# }
 #
 #
 # ## x ##
@@ -78,6 +102,14 @@ path_Table = list()
 #   'x': '192.168.199.60',
 #   'y': '192.168.199.5'
 # }
+# 
+# receiver = {
+#   'u': False,
+#   'v': False,
+#   'w': False,
+#   'y': False,
+#   'z': False
+# }
 #
 #
 # ## y ##
@@ -96,6 +128,14 @@ path_Table = list()
 #     'z': '192.168.199.6',
 #     'x': '192.168.199.60'
 # }
+# 
+# receiver = {
+#   'u': False,
+#   'v': False,
+#   'w': False,
+#   'x': False,
+#   'z': False
+# }
 #
 #
 ## z ##
@@ -111,5 +151,13 @@ ip_Mapping = {
       'w': '192.168.199.208',
       'y': '192.168.199.5',
       'z': '192.168.199.6'
+}
+
+receiver = {
+  'u': False,
+  'v': False,
+  'w': False,
+  'x': False,
+  'y': False
 }
 
