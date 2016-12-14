@@ -8,12 +8,13 @@ def messages_to_json(type, router_table, ip_mapping, receiver):
     message['type'] = type
 
     router_Names = []
-    if receiver != None:
-        for name in receiver:
-            if name in router_table.keys():
-                if receiver[name] == False:
-                    router_table[package.settings.setting.HOST].pop(name)
-                    router_Names.append(name)
+    for name in receiver:
+        if name in router_table:
+            if receiver[name] == False:
+                print("POP::NAME: ")
+                print("router_table: ", router_table)
+                router_table[package.settings.setting.HOST].pop(name)
+                router_Names.append(name)
     for name in router_Names:
         router_table.pop(name)
 
