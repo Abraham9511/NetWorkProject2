@@ -1,4 +1,4 @@
-import time
+import time, threading
 import package.settings.setting
 
 def timing():
