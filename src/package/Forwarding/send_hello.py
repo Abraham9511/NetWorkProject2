@@ -1,9 +1,21 @@
 import socket, time, json,threading
 import package.settings.setting
+import copy
 
-def messages_to_json(type, router_table, ip_mapping):
+
+def messages_to_json(type, router_table, ip_mapping, receiver):
     message = dict()
     message['type'] = type
+
+    router_Names = []
+    if receiver != None:
+        for name in receiver:
+            if name in router_table.keys() == True and receiver[name] == False:
+                router_table[package.settings.setting.HOST].pop(name)
+                router_Names.append(name)
+    for name in router_Names:
+        router_table.pop(name)
+
     message['router_Table'] = router_table
     message['ip_Mapping'] = ip_mapping
     json_object = json.dumps(message)
@@ -20,7 +32,8 @@ def send_hello_single():
         directNode = package.settings.setting.router_Table[package.settings.setting.HOST]
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         me = package.settings.setting.ip_Mapping[package.settings.setting.HOST]
-        msg = messages_to_json("01", package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
+        msg = messages_to_json("01", copy.deepcopy(package.settings.setting.router_Table), copy.deepcopy(package.settings.setting.ip_Mapping),copy.deepcopy(package.settings.setting.receiver))
+        # print("HERE!!", package.settings.setting.router_Table)
         hp = heartbeat_to_json("11")
         for num in range(2, 254):
             ip = '192.168.199.' + str(num)
