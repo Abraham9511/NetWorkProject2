@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter.messagebox as messagebox
 import socket, threading, json
-import package.settings.setting as setting
+import package.settings.setting
 
 
 def messages_to_json(type, goal_ip, content):
@@ -37,22 +37,22 @@ class Application(Frame):
       # 只有当数据包和目的节点都不为空才将数据包发出
       if dest == None:
         messagebox.showinfo('Message', 'Please input the destination ip address!')
-      elif setting.ip_Mapping[dest] == None:
+      elif package.settings.setting.ip_Mapping[dest] == None:
         messagebox.showinfo('Message', 'The destination ip address does not exist!')
       elif message == None:
         messagebox.showinfo('Message', 'Please input the message!')
       else:
-        destIp = setting.ip_Mapping[dest]
+        destIp = package.settings.setting.ip_Mapping[dest]
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        for dst in setting.path_Table:
+        for dst in package.settings.setting.path_Table:
           # 选择正确的路径
           if dst[-1] == dest:
             path = dst
             print("PATH %s" % path)
             break
         # 得到下一个节点
-        ip = setting.ip_Mapping[path[1]]
-        s.sendto(messages_to_json("0",destIp, message).encode('utf-8'), (ip, setting.Port))
+        ip = package.settings.setting.ip_Mapping[path[1]]
+        s.sendto(messages_to_json("0",destIp, message).encode('utf-8'), (ip, package.settings.setting.Port))
         s.close()
     finally:
       lock.release()
