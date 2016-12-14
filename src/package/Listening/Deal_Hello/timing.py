@@ -1,16 +1,17 @@
 import time
-import package.settings.setting as setting
+import package.settings.setting
 
 def timing():
-  for name in setting.receiver:
-    setting.receiver[name] = False
+  for name in package.settings.setting.receiver:
+    package.settings.setting.receiver[name] = False
   time.sleep(30)
-  router_Self = setting.router_Table[setting.HOST]
+  router_Self = package.settings.setting.router_Table[package.settings.setting.HOST]
   router_Names = []
-  for name, value in setting.receiver:
-    if value == False:
-      router_Self.pop(name)
-      router_Names.append(name)
+  if package.settings.setting.receiver != None:
+    for name in package.settings.setting.receiver:
+      if package.settings.setting.receiver[name] == False:
+        router_Self.pop(name)
+        router_Names.append(name)
 
   for name in router_Names:
-    setting.router_Table.pop(name)
+    package.settings.setting.router_Table.pop(name)

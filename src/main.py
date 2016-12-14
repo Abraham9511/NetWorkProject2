@@ -4,7 +4,7 @@ from package.Forwarding.send_message import *
 from package.Listening.Deal_Hello.deal_With_Hello_Packet import *
 from package.Listening.Deal_Hello.timing import *
 
-import package.settings.setting as setting
+import package.settings.setting
 
 import threading
 
@@ -14,7 +14,7 @@ if __name__=="__main__":
     timing_start.start()
     print("DEBUG: Start timing")
 
-    deal_With_Hello_Packet(setting.router_Table, setting.ip_Mapping)
+    deal_With_Hello_Packet(package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
 
     forwarding = threading.Thread(target = send_hello)
     forwarding.start()
