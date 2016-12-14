@@ -19,6 +19,6 @@ def timing():
     for name in router_Names:
       package.settings.setting.router_Table.pop(name)
     rlock.release()
-  except socket.error:
-    print("DEBUG::Fail to timing\n")
+  except Exception as e:
+    print('except: ', e)
 
