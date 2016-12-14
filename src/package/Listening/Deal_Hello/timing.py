@@ -3,12 +3,14 @@ import package.settings.setting
 
 def timing():
   router_Names = []
-  if package.settings.setting.receiver != None:
-    for name in package.settings.setting.receiver:
-      if name in package.settings.setting.router_Table.keys():
-        if package.settings.setting.receiver[name] == False:
-          package.settings.setting.router_Table[package.settings.setting.HOST].pop(name)
-          router_Names.append(name)
+  for name in package.settings.setting.receiver:
+    if name in package.settings.setting.router_Table[package.settings.setting.HOST]:
+      if package.settings.setting.receiver[name] == False:
+        package.settings.setting.router_Table[package.settings.setting.HOST].pop(name)
+        router_Names.append(name)
+    else:
+      if package.settings.setting.receiver[name] == False:
+        router_Names.append(name)
   for name in router_Names:
     package.settings.setting.router_Table.pop(name)
 
