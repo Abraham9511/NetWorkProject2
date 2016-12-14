@@ -32,6 +32,7 @@ def Listening():
             elif packet['type'] == '11':
                 name = getName(address[0])
                 package.settings.setting.receiver[name] = True
+            print(package.settings.setting.router_Table)
             rlock.release()
         except socket.error:
             print("DEBUG::Fail to Listening\n")

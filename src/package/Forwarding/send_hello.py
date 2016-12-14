@@ -10,12 +10,14 @@ def messages_to_json(type, router_table, ip_mapping, receiver):
     router_Names = []
     if receiver != None:
         for name in receiver:
-            if name in router_table.keys() == True and receiver[name] == False:
-                router_table[package.settings.setting.HOST].pop(name)
-                router_Names.append(name)
+            if name in router_table.keys():
+                if receiver[name] == False:
+                    router_table[package.settings.setting.HOST].pop(name)
+                    router_Names.append(name)
     for name in router_Names:
         router_table.pop(name)
 
+    print("router_table", router_table)
     message['router_Table'] = router_table
     message['ip_Mapping'] = ip_mapping
     json_object = json.dumps(message)
@@ -33,7 +35,8 @@ def send_hello_single():
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         me = package.settings.setting.ip_Mapping[package.settings.setting.HOST]
         msg = messages_to_json("01", copy.deepcopy(package.settings.setting.router_Table), copy.deepcopy(package.settings.setting.ip_Mapping),copy.deepcopy(package.settings.setting.receiver))
-        # print("HERE!!", package.settings.setting.router_Table)
+        print("HERE!!", msg)
+        # print("DSBUG::sendHello", msg)
         hp = heartbeat_to_json("11")
         for num in range(2, 254):
             ip = '192.168.199.' + str(num)
