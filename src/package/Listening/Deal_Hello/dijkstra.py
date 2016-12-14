@@ -1,4 +1,4 @@
-import package.settings.setting
+import package.settings.setting as setting
 
 def Initiallizatoin_For_LS(u,G):
     D = dict()
@@ -9,12 +9,12 @@ def Initiallizatoin_For_LS(u,G):
             D[v] = G[u][v]
             pre[v] = u
         else:
-            D[v] = package.settings.setting.INF
+            D[v] = setting.INF
     return D, curNode, pre
 
 def min_D_w(D,curNode):
     min_Index = 'NO'
-    min_Value = package.settings.setting.INF
+    min_Value = setting.INF
     for node in D.keys():
         if D[node] < min_Value and node not in curNode:
             min_Index = node
@@ -52,27 +52,27 @@ def Link_State_Agorithm(u, G):
 #       'y': {'y':0, 'z':2, 'w':1, 'x':1},
 #       'z': {'z':0, 'w':5, 'y':2}
 #      }
-# package.settings.setting.INF = 99999999
+# setting.INF = 99999999
 
 def generate_Shortest_Path():
-    package.settings.setting.path_Table = list()
-    G = package.settings.setting.router_Table
-    D, pre= Link_State_Agorithm(package.settings.setting.HOST ,G)
+    setting.path_Table = list()
+    G = setting.router_Table
+    D, pre= Link_State_Agorithm(setting.HOST ,G)
 
     print("----------New-Cost----------")
     # rlock = threading.RLock()
     # rlock.acquire()
     for key in D.keys():
-        if D[key] == package.settings.setting.INF:
+        if D[key] == setting.INF:
             continue
         else:
-            if key != package.settings.setting.HOST :
-                path = shortest_Path(package.settings.setting.HOST , key, pre)
-                package.settings.setting.path_Table.append(path)
-                print("Shortest path from "+package.settings.setting.HOST + " to "+key+" is: ", end="")
+            if key != setting.HOST :
+                path = shortest_Path(setting.HOST , key, pre)
+                setting.path_Table.append(path)
+                print("Shortest path from "+setting.HOST + " to "+key+" is: ", end="")
                 output_path = ''
                 for item in path:
-                    if item == package.settings.setting.HOST :
+                    if item == setting.HOST :
                         output_path += item
                     else:
                         output_path += ' => '+item
@@ -83,8 +83,8 @@ def generate_Shortest_Path():
 #     print('Run LS')
 #     D, pre= Link_State_Agorithm('u',G)
 #     for key in D.keys():
-#         if D[key] == package.settings.setting.INF:
-#             print(key+' package.settings.setting.INF')
+#         if D[key] == setting.INF:
+#             print(key+' setting.INF')
 #         else:
 #             print(key+' '+str(D[key]))
 #     path = shortest_Path('u', 'z', pre)
