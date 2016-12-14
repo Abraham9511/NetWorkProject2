@@ -9,7 +9,7 @@ def timing():
   router_Names = []
   if package.settings.setting.receiver != None:
     for name in package.settings.setting.receiver:
-      if package.settings.setting.receiver[name] == False:
+      if name in package.settings.setting.router_Table.keys() and package.settings.setting.receiver[name] == False:
         router_Self.pop(name)
         router_Names.append(name)
 
