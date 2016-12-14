@@ -10,18 +10,16 @@ def deal_With_Message_Packet(goal_ip, content, new_packet):
         print('Get message: ', content)
     else:
         print('Forwarding')
-    flag = False
-    next_ip = None
-    for path in package.settings.setting.path_Table:
-        dest = path[-1]
-        # 取得下一个节点
-        if package.settings.setting.ip_Mapping[dest] == goal_ip:
-            next_ip = package.settings.setting.ip_Mapping[path[1]]
-            break
-    if flag:
-      s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-      s.sendto(content, (next_ip, package.settings.setting.Port))
-      s.close()
+        for path in package.settings.setting.path_Table:
+            dest = path[-1]
+            # 取得下一个节点
+            if package.settings.setting.ip_Mapping[dest] == goal_ip:
+                next_ip = package.settings.setting.ip_Mapping[path[1]]
+                s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                s.sendto(new_packet, (next_ip, package.settings.setting.Port))
+                s.close()
+                break
+
 
 
 
