@@ -18,19 +18,20 @@ def Listening():
             if new_packet == '':
                 continue
             packet = json.loads(new_packet.decode('utf-8'))
-            print(packet)
-            if (packet['type'] == '1'):
+            # print(packet)
+            if (packet['type'] == '01'):
                 print("DEBUG::This is Hello Packet")
-                name = getName(address[0])
-                package.settings.setting.receiver[name] = True
                 packet_router_table = packet['router_Table']
                 packet_ip_mapping = packet['ip_Mapping']
                 deal_With_Hello_Packet(packet_router_table, packet_ip_mapping)
-            else:
+            elif packet['type'] == '00':
                 print("DEBUG::This is Message Packet")
                 goal_ip = packet['goal_ip']
                 content = packet['content']
                 deal_With_Message_Packet(goal_ip, content, new_packet)
+            elif packet['type'] == '11':
+                name = getName(address[0])
+                package.settings.setting.receiver[name] = True
             rlock.release()
         except socket.error:
             print("DEBUG::Fail to Listening\n")

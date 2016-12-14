@@ -52,7 +52,7 @@ class Application(Frame):
             break
         # 得到下一个节点
         ip = package.settings.setting.ip_Mapping[path[1]]
-        s.sendto(messages_to_json("0",destIp, message).encode('utf-8'), (ip, package.settings.setting.Port))
+        s.sendto(messages_to_json("00",destIp, message).encode('utf-8'), (ip, package.settings.setting.Port))
         s.close()
     finally:
       lock.release()

@@ -10,7 +10,7 @@ import threading
 
 
 if __name__=="__main__":
-    timing_start = threading.Thread(target = timing)
+    timing_start = threading.Thread(target = cycle)
     timing_start.start()
     print("DEBUG: Start timing")
 
