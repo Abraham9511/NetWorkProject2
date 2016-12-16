@@ -17,7 +17,7 @@
 5. 使用dijstras算法实现最短路径
 
 ### 第三部分：具体实现
-* 实现所在的网络通许层面：应用层和传输曾之间的，使用socket完成
+* 实现所在的网络通许层面：应用层和传输曾之间的，使用socket完成，传输曾使用udp
 * 编程语言：python3
 * 操作系统：Ubuntu16.04， macOS
 * 编码：utf-8
@@ -148,56 +148,45 @@ INF    # 一个极大值，用于dijkstra计算
 ```
 
 ##### python3目录import问题
+在写代码的时候我们希望将代码组织在有序文件夹下面，譬如说send_hello.py就放在src/package/Forwarding下面，那么处在/src下面的main.py函数为了能用到该方法，需要做两件事
 
+1. package开始的文件夹均要加入__init__.py文件，用来帮助python编译识别包
+2. import的时候使用绝对路径
 
-#### 分工
-* 监听函数
-	* 处理hello包：庄
-	* 处理消息转发以及显示：欧
-* hello包发送函数：罗干
+第2点显著突出在，当我们在/settings.setting.py文件中定义了全局变量，当其他文件想使用的时候，务必直接import绝对路径才能真正读取修改该变量，血的教训！
 
+虽然python简单，但是毕竟每门语言都其特性，不去集中时间了解，反而在大项目中往往会掉进各种蜜汁坑
 
 #### 运行
 #### 依赖包
-sudo apt install python3-tk // 用于窗口实现
-
+> sudo apt install python3-tk // 用于窗口实现
+#### 修改注释
+在每台对应的电脑上修改相应局部注释，然后台路由器在30s内全部启动
+#### 查看所有电脑的路由表信息
+#### 查看所有电脑更新之后的路由信息
+#### 查看路由收敛之后的最短路径
+#### 发送消息
+中间节点在控制台输出Forwarding，而最终节点会输出起始起始节点的消息
+#### 荡机一台路由器，重复以上步骤
 
 #### 分工
 ##### 写文档
 欧光文
-
 * send_message
 * deal_With_Message_Packet
 * 着重突出网络传输编码问题
 
 罗干
-
 * settings
 * send_hello
 * main
 
 庄嘉鑫
-
 * 着重突出python3 import问题
 * Listening
 * deal_With_Hello_Packet
 
-#### 遇到的难点
-##### 网络传输问题
-**注意：这个项目使用的是python3语法**
-python3默认使用utf-8编码，在处理数据的网络传输中非常方便
-
-###### 发送数据包（dict对象）
-1. 使用json.dumps将其序列化为json格式
-2. 使用str.encode('utf-8')将其转换成bytes格式
-
-###### 接受数据包（dict对象）
-1. 使用str.decode('utf-8')将数据包从bytes转换成str类型
-2. 使用json.loads将str数据转换成dict对象
-
-##### python3 import问题
-
-#### 文档
+#### 文档（介绍文件以及内部函数）
 ##### send_hello.py
 function
 * 输入：
@@ -222,6 +211,12 @@ function
 ##### 12.12
 除了网络节点瘫痪处理外基本实现
 需要补充ospf的相关知识以及预订12.14晚上7点518 6台机器测试
+
+##### 12.14
+所目标功能实现
+
+##### 12.16
+README更新完毕
 
 ### 贡献者
 欧光文，庄嘉鑫，罗干

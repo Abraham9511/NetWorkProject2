@@ -1,6 +1,8 @@
 import time, threading
 import package.settings.setting
 
+
+# 删除多余的路由信息
 def timing():
   router_Names = []
   for name in package.settings.setting.receiver:
@@ -18,6 +20,7 @@ def timing():
   for name in package.settings.setting.receiver:
     package.settings.setting.receiver[name] = False
 
+# 每隔30s运行一次删除死亡节点的路由信息
 def cycle():
     while True:
       time.sleep(30)

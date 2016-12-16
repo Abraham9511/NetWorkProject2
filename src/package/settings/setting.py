@@ -1,7 +1,9 @@
-## All make sense ##
+## GLOBAL SETTINGS ##
 Port = 2711
 INF = 9999
 path_Table = list()
+
+## LOCAL SETTINGS ##
 
 # ## u setting ##
 # HOST = 'u'
