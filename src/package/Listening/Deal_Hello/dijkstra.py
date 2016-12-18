@@ -57,6 +57,7 @@ def generate_Shortest_Path():
 
     # 以下在控制台输出从该点到其他点的最低cost的路径
     print("----------New-Cost----------")
+    print(package.settings.setting.router_Table)
     for key in D.keys():
         if D[key] == package.settings.setting.INF:
             continue

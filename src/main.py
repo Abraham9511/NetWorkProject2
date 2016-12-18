@@ -12,7 +12,7 @@ if __name__=="__main__":
     timing_start.start()
     print("DEBUG: Start timing")
 
-    deal_With_Hello_Packet(package.settings.setting.router_Table, package.settings.setting.ip_Mapping)
+    package.Listening.Deal_Hello.dijkstra.generate_Shortest_Path()
 
     forwarding = threading.Thread(target = send_hello_hearbeat)
     forwarding.start()

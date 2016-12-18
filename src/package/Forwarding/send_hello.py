@@ -22,7 +22,7 @@ def messages_to_json(type, router_table, ip_mapping, receiver):
         if name in router_table:
             router_table.pop(name)
 
-    print("router_table", router_table)
+    # print("router_table", router_table)
     message['router_Table'] = router_table
     message['ip_Mapping'] = ip_mapping
     json_object = json.dumps(message)
@@ -42,7 +42,7 @@ def send_hello_heartbeat_single():
 
     me = package.settings.setting.ip_Mapping[package.settings.setting.HOST]
     msg = messages_to_json("01", copy.deepcopy(package.settings.setting.router_Table), copy.deepcopy(package.settings.setting.ip_Mapping),copy.deepcopy(package.settings.setting.receiver))
-    print("HERE!!", msg)
+    # print("HERE!!", msg)
     hp = heartbeat_to_json("11")
     # 广播心跳包
     for num in range(2, 254):
