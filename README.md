@@ -160,6 +160,7 @@ INF    # 一个极大值，用于dijkstra计算
 #### 运行
 #### 依赖包
 > sudo apt install python3-tk // 用于窗口实现
+
 #### 修改注释
 在每台对应的电脑上修改相应局部注释，然后台路由器在30s内全部启动
 #### 查看所有电脑的路由表信息
@@ -188,10 +189,103 @@ INF    # 一个极大值，用于dijkstra计算
 
 #### 文档（介绍文件以及内部函数）
 ##### send_hello.py
-function
-* 输入：
-* 输出：
-* 功能：
+
+messages_to_json
+
+* 输入：标识位，路由表，IP映射表，记录是否收到心跳包的表。
+* 输出：json对象
+* 功能：将三个字段序列化
+
+heartbeat_to_json
+
+* 输入：包的标识位
+* 输出：json对象
+* 功能：将heartbeat包序列化
+
+send_hello_heartbeat_single
+
+* 输入：无
+* 输出：无
+* 功能：只向直接连接的节点发送hello包,heartbear包
+
+send_hello_heartbeat
+
+* 输入：无
+* 输出：无
+* 功能：每隔5秒向相邻节点发送hello和heartbeawt包。
+
+##### deal_With_Hello_Packet.py
+
+deal_With_Hello_Packet
+
+* 输入：收到的hello包中包含的路由表和IP映射表
+* 输出：无
+* 功能：进行hello包的处理。将结点当前的路由表，IP映射表与收到的hello包中包含的路由表，IP映射表进行比对。如果收到的hello包中包含的路由表和IP映射表有自己没有包含的条目，则增加之，并运行dijkstra计算最短路径，更新到path_Table。
+
+##### timing.py
+
+timing
+
+* 输入：无
+* 输出：无
+* 功能：删除多余的路由信息。
+
+cycle
+
+* 输入：无
+* 输出：无
+* 功能：每隔30s运行一次删除死亡节点的路由信息。
+
+##### Listening.py
+
+Listening
+
+* 输入：无
+* 输出：无
+* 功能：监听并接收包，根据包头部type判断包的类型（hello, message, heartbeat三种类型），并根据包的类型调用相应的处理函数。
+
+getName
+* 输入：ip地址
+* 输出：无
+* 功能：获取ip地址对应的HOST。
+
+##### dijkstra.py
+
+generate_Shortest_Path
+
+* 输入：无
+* 输出：无
+* 功能：应用dijstra算法生成最短路径并且更新到path_Table。
+
+initiallizatoin_for_ls
+
+* 输入： 节点自己的标记u， 网络拓扑G
+* 输出： 节点u到所有节点的代价， 当前的所有与u直接相连的节点集合，与该节点直接相连的节点的前一个节点为u
+* 功能：初始化
+
+min_D_w
+
+* 输入：当前起始节点到所有已知节点的代价D, 当前已经计算过代价的节点集合
+* 输出：最小的
+* 功能：计算最短路径。
+
+shortest_Path
+
+* 输入：起始节点u，目标节点，每一个节点的前一个节点的集合
+* 输出：从u到end的最短路径
+* 功能：根据已经生成的path_Table找到从u到end的最短路径
+
+Link_State_Agorithm
+
+* 输入：u是起始节点，G是网络拓扑
+* 输出：D是起始节点到左右节点的代价，pre记录所有节点在最短路径的树中的父节点
+* 功能：生成最短路径
+
+##### settings.py
+
+* 输入：无
+* 输出：无
+* 功能：配置文件，存储每个结点的路由表和IP映射表。
 
 ##### send_message.py
 function
@@ -201,7 +295,9 @@ function
 * 实现原理：点击发送按钮时，会先判断数据包和目的节点是否合理。只有当两者都合理时，才根据迪杰特斯拉算法取得下一个节点，将该数据包发送到该节点
 
 ##### deal_With_Message_Packet.py
-function
+
+deal_With_Message_Packet
+
 * 输入：数据包
 * 输出：无
 * 功能：进行数据包的处理。如果目的节点是自身，则将其进行输出；否则，进行数据包的转发
