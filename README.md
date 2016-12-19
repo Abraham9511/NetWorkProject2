@@ -175,6 +175,7 @@ INF    # 一个极大值，用于dijkstra计算
 欧光文
 * send_message
 * deal_With_Message_Packet
+* timing
 * 着重突出网络传输编码问题
 
 罗干
@@ -303,6 +304,35 @@ deal_With_Message_Packet
 * 功能：进行数据包的处理。如果目的节点是自身，则将其进行输出；否则，进行数据包的转发
 
 
+#### 测试结果截图
+##### 测试路径
+###### 正常情况下：x -> y -> z
+路由信息稳定前：
+x的路由信息：
+![](./image/x1.png)
+
+路由信息稳定后：
+x的路由信息：
+![](./image/x2.png)
+z的路由信息：
+![](./image/z1.png)
+发送信息：
+x发送信息（zzz）：
+y转发信息：
+![](./image/y1.jpg)
+z收到消息：
+![](./image/z2.png)
+
+y宕机后：x -> w -> z
+x的路由信息：
+![](./image/x3.png)
+发送信息：
+x发送信息(second):
+w转发信息：
+![](./image/w1.png)
+z转发信息：
+![](./image/z3.png)
+
 #### 进度
 ##### 12.12
 除了网络节点瘫痪处理外基本实现
@@ -313,6 +343,9 @@ deal_With_Message_Packet
 
 ##### 12.16
 README更新完毕
+
+#### 12.19
+进行最后的README更新，补充效果截图
 
 ### 贡献者
 欧光文，庄嘉鑫，罗干
