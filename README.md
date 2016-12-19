@@ -160,6 +160,7 @@ INF    # 一个极大值，用于dijkstra计算
 #### 运行
 #### 依赖包
 > sudo apt install python3-tk // 用于窗口实现
+> python3 main.py
 
 #### 修改注释
 在每台对应的电脑上修改相应局部注释，然后台路由器在30s内全部启动
