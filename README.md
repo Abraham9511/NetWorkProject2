@@ -159,7 +159,7 @@ INF    # 一个极大值，用于dijkstra计算
 
 #### 运行
 #### 依赖包
-> sudo apt install python3-tk // 用于窗口实现
+> sudo apt install python3-tk // 用于窗口实现  
 > python3 main.py
 
 #### 修改注释
